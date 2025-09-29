@@ -1,0 +1,28 @@
+body {
+  width: 100%;
+  height: 100%;
+  background-color: aqua;
+}
+#container {
+  width: 50%;
+
+  height: 50%;
+
+  background-color: #567;
+
+  position: absolute;
+
+  left: 30%;
+
+  top: 30%;
+
+  margin-left: -50px;
+
+  margin-top: -50px;
+}
+.card {
+  background-color: darkolivegreen;
+  margin: 50px;
+  text-align: center;
+  height: 80%;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Country Game</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body onload="">
+    <div id="container" class="container">
+      <div class="card">
+        <form id="loginForm">
+          <h1>Kayıt Ol</h1>
+          <label for="username" style="font-weight: bold">Kullanıcı Adı</label
+          ><br />
+          <input
+            id="username"
+            type="text"
+            placeholder="Kullanıcı Adı Giriniz"
+          />
+          <br />
+          <label for="password" style="font-weight: bold">Şifre</label><br />
+          <input
+            id="userPassword"
+            type="password"
+            placeholder="Şifre Giriniz"
+          />
+          <br />
+          <input id="rememberMe" type="checkbox" checked="checked" />Beni
+          Hatırla
+          <br />
+          <button id="loginBtn" onclick="saveUserName()">Giriş</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script src="login.js"></script>
+</html>
