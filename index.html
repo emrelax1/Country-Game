@@ -1,11 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
   </head>
-  <body>
-    anasayfa
+  <body onload="viewSkorboard(),viewSkorboardOnlyUser()">
+    <div class="container" id="container">
+      <div id="logoutbtn">
+        <button id="logout" onclick="logOut()">Çıkış Yap X</button>
+      </div>
+
+      <div class="skorboard" id="skorboard">
+        <ol id="skorboard">
+          <h2>En İyiler</h2>
+        </ol>
+      </div>
+      <div id="logodiv">
+        <img id="logo" onclick="startGame()" src="logo.png" alt="logo" />
+      </div>
+
+      <div class="skorboardUser" id="skorboardUser">
+        <ol id="skorboardUser">
+          <h2>En İyi Skorların</h2>
+        </ol>
+      </div>
+    </div>
   </body>
+  <script src="index.js"></script>
 </html>

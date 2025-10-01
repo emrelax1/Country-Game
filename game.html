@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="game.css" />
+  </head>
+  <body>
+    <div>
+      <select name="gameType" id="gameType">
+        <option value="hard">Default</option>
+        <option value="hard">Zor</option>
+        <option value="medium">Orta</option>
+        <option value="kolay">Kolay</option>
+      </select>
+    </div>
+    <div class="card" id="main">
+      <div id="score">Score :</div>
+      <div class="flag" id="flag"></div>
+      <div class="countryname">
+        <p id="countaryName"></p>
+      </div>
+      <div class="inputUser">
+        <label for="countaryNameInput">Ülke Adı :</label>
+        <input type="text" id="countaryNameInput" />
+        <br />
+        <label for="countaryCapitalInput">Başkenti :</label>
+        <input type="text" id="countaryCapitalInput" />
+        <br />
+        <label for="countaryPopulationInput">Nüfusu :</label>
+        <input type="number" id="countaryPopulationInput" />
+        <br />
+        <label for="countaryPopulationInput">Puan :</label>
+        <input type="number" id="point" />
+      </div>
+      <div class="continueBtn">
+        <button id="continueBtn" onclick="viewCountries()">Sonraki</button>
+        <button id="continueBtn" onclick="control()">deneme</button>
+      </div>
+    </div>
+  </body>
+  <script src="game.js"></script>
+</html>
