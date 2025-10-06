@@ -3,7 +3,7 @@ window.addEventListener("onload", function () {
   let activeUser = [];
   localStorage.setItem("activeUser", JSON.stringify(activeUser));
 });
-
+let gameType = [];
 let randomCountery = 0;
 let currentGame = JSON.parse(localStorage.getItem("currentGame")) || {
   index: 0,
@@ -50,17 +50,48 @@ function viewCountries() {
 }
 GetCountries();
 function startGame() {
-  currentGame = {
-    index: 0,
-    user: currentGame.user,
-    totalPoint: 0,
-    questions: [],
-  };
+  syncCurrentGameUser(); // Önce sync et
+  let currentGame = JSON.parse(localStorage.getItem("currentGame")); // Yeniden yükle
+  currentGame.index = 0;
+  currentGame.totalPoint = 0;
+  currentGame.questions = [];
   localStorage.setItem("currentGame", JSON.stringify(currentGame));
-
   window.location.href = "game.html";
+}
+function getGameTypeModal() {
+  var modal = document.getElementById("myModal");
+  modal.style.display = "block";
+  modal.innerHTML = `
+  <div class="modal-content">
+      <div class="card">
+        <form class="category" id="category">
+          <h3>Zorluk Seviyesi Seçin</h3>
+          <button type="button" id="easy" value ="easy"  onclick="selectedGameType(this) ">Kolay</button>
+          <button type="button" id="medium" value ="medium" onclick="selectedGameType(this)">Orta</button>
+          <button type="button" id="hard" value ="hard" onclick="selectedGameType(this)">Zor</button>
+        </form>
+      </div>
+    </div>
+  `;
 
-  GetCountries();
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+}
+function selectedGameType(element) {
+  gameTypeList = JSON.parse(localStorage.getItem("gameType")) ?? [];
+
+  gameTypebtn = element.getAttribute("id");
+  console.log("gameTypebtn", gameTypebtn);
+
+  var item = {
+    gameType: gameTypebtn,
+  };
+  gameTypeList.push(item);
+  localStorage.setItem("gameType", JSON.stringify(gameTypeList));
+  window.location.href = "game.html";
 }
 
 function control(value) {
@@ -125,19 +156,24 @@ function control(value) {
   }
 }
 function saveHistory() {
-  historyList = JSON.parse(localStorage.getItem("history")) ?? [];
-  var id = historyList.length ? historyList[historyList.length - 1].id : 0;
-  currentGame = JSON.parse(localStorage.getItem("currentGame"));
-  currentGame = {
+  syncCurrentGameUser(); // Son kez sync
+  let currentGameData = JSON.parse(localStorage.getItem("currentGame"));
+  if (!currentGameData.user) {
+    console.error("User not found in currentGame! Aborting save.");
+    return;
+  }
+  let historyList = JSON.parse(localStorage.getItem("history")) ?? [];
+  let id = historyList.length ? historyList[historyList.length - 1].id : 0;
+  let gameToSave = {
     id: id + 1,
-    index: currentGame.index,
-    user: currentGame.user,
-    questions: [currentGame.questions],
-    totalPoint: currentGame.totalPoint,
+    index: currentGameData.index,
+    user: currentGameData.user,
+    questions: currentGameData.questions, // Düz array
+    totalPoint: currentGameData.totalPoint,
   };
-  historyList.push(currentGame);
+  historyList.push(gameToSave);
   localStorage.setItem("history", JSON.stringify(historyList));
-  console.log("currentGame", currentGame);
+  console.log("History saved with user:", gameToSave.user);
 }
 function viewSkorboard() {
   historyList = JSON.parse(localStorage.getItem("history")) ?? [];
@@ -151,7 +187,7 @@ function viewSkorboard() {
 
     if (count <= 5)
       skorboardList.innerHTML += `
-          <li>${element.user} -- ${element.totalPoint}</li>
+    <li><span class="user">${element.user}</span><span class="score">${element.totalPoint}</span></li>
           
     `;
   });
@@ -175,7 +211,7 @@ function viewSkorboardOnlyUser() {
         count += 1;
         if (count <= 5)
           skorboardListUser.innerHTML += `
-          <li>${element.user} -- ${element.totalPoint}</li>
+        <li><span class="user">${element.user}</span><span class="score">${element.totalPoint}</span></li>
           
     `;
       }
@@ -183,10 +219,11 @@ function viewSkorboardOnlyUser() {
   });
 }
 function logOut() {
-  window.location.href = "loginpage.html";
   let activeUsers = JSON.parse(localStorage.getItem("activeUser"));
   activeUsers = [];
   localStorage.setItem("activeUser", JSON.stringify(activeUsers));
+  localStorage.removeItem("currentGame");
+  window.location.href = "loginpage.html";
 }
 
 let start = document.querySelector("#logodiv");
@@ -202,7 +239,47 @@ function swing(element) {
 
     requestAnimationFrame(update);
   }
-  update(0); //love your nested functions
+  update(0);
 }
 
 swing(start);
+function checkLogin() {
+  let activeUsers = JSON.parse(localStorage.getItem("activeUser")) || [];
+  if (activeUsers.length === 0) {
+    alert("Giriş yapmadan oyuna erişemezsiniz!");
+    window.location.href = "loginpage.html";
+    return false;
+  }
+  return true;
+}
+
+window.addEventListener("load", function () {
+  if (checkLogin()) {
+    viewSkorboard();
+    viewSkorboardOnlyUser();
+  }
+});
+function syncCurrentGameUser() {
+  let currentGame = JSON.parse(localStorage.getItem("currentGame")) || {
+    index: 0,
+    user: "",
+    totalPoint: 0,
+    questions: [],
+  };
+  let activeUsers = JSON.parse(localStorage.getItem("activeUser")) || [];
+
+  if (activeUsers.length > 0) {
+    currentGame.user = activeUsers[activeUsers.length - 1].userName;
+    localStorage.setItem("currentGame", JSON.stringify(currentGame));
+    console.log("User synced to currentGame:", currentGame.user);
+  } else {
+    window.location.href = "loginpage.html";
+  }
+}
+window.addEventListener("load", function () {
+  syncCurrentGameUser();
+  if (checkLogin()) {
+    viewSkorboard();
+    viewSkorboardOnlyUser();
+  }
+});

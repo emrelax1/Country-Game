@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Country Game</title>
     <link rel="stylesheet" href="login.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
   </head>
   <body onload="">
     <div id="container">
       <div class="card">
-        <form id="signinForm" submit="#">
+        <form id="signinForm" onsubmit="return false;">
           <h1>Kayıt Ol</h1>
           <label for="username" style="font-weight: bold">Kullanıcı Adı</label
           ><br />
@@ -18,23 +19,26 @@
             type="text"
             placeholder="Kullanıcı Adı Giriniz"
             autocomplete="username"
+            required
           />
           <br />
-          <label for="password" style="font-weight: bold">Şifre</label><br />
+          <label for="userPassword" style="font-weight: bold">Şifre</label
+          ><br />
           <input
             id="userPassword"
             type="password"
             placeholder="Şifre Giriniz"
             autocomplete="current-password"
+            required
+            minlength="6"
           />
           <br />
-
           <button id="siginBtn" onclick="saveUser()" type="button">
             Kayıt Ol
           </button>
           <br />
           <br />
-          <a href="loginpage.html">Zaten hesabın var mı ?</a>
+          <a href="loginpage.html" class="link-text">Zaten hesabın var mı ?</a>
         </form>
       </div>
     </div>

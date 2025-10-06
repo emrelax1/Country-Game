@@ -3,28 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Country Game</title>
     <link rel="stylesheet" href="index.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
   </head>
-  <body onload="viewSkorboard(),viewSkorboardOnlyUser()">
+  <body>
     <div class="container" id="container">
       <div id="logoutbtn">
         <button id="logout" onclick="logOut()">Çıkış Yap X</button>
       </div>
 
       <div class="skorboard" id="skorboard">
-        <ol id="skorboard">
-          <h2>En İyiler</h2>
-        </ol>
+        <h2>En İyiler</h2>
+
+        <ol id="skorboard"></ol>
       </div>
       <div id="logodiv">
-        <img id="logo" onclick="startGame()" src="logo.png" alt="logo" />
+        <img id="logo" onclick="getGameTypeModal()" src="logo.png" alt="logo" />
       </div>
+      <div id="myModal" class="modal"></div>
 
       <div class="skorboardUser" id="skorboardUser">
-        <ol id="skorboardUser">
-          <h2>En İyi Skorların</h2>
-        </ol>
+        <h2>En İyi Skorların</h2>
+        <ol id="skorboardUser"></ol>
       </div>
     </div>
   </body>

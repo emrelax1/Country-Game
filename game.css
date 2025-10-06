@@ -1,8 +1,392 @@
-#main {
-  background-color: blue;
-  position: relative;
-  left: 25%;
-  height: 50%;
-  width: 50%;
+/* scoreboard */
+.skorboard {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 320px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.skorboard h2 {
+  margin-bottom: 1rem;
+  color: #2d3436;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #0984e3;
+  padding-bottom: 0.5rem;
+}
+
+.skorboard ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skorboard li {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  background: #f1f2f6;
+  margin-bottom: 0.8rem;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.skorboard li:hover {
+  background: #dfe6e9;
+  transform: translateX(5px);
+}
+
+.skorboard .user {
+  color: #2d3436;
+}
+
+.skorboard .score {
+  font-weight: bold;
+  color: #0984e3;
+}
+
+.skorboardUser {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 320px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.skorboardUser h2 {
+  margin-bottom: 1rem;
+  color: #2d3436;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #0984e3;
+  padding-bottom: 0.5rem;
+}
+
+.skorboardUser ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skorboardUser li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f1f2f6;
+  margin-bottom: 0.8rem;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.skorboardUser li:hover {
+  background: #dfe6e9;
+  transform: translateX(5px);
+}
+
+.skorboardUser .user {
+  color: #2d3436;
+}
+
+.skorboardUser .score {
+  font-weight: bold;
+  color: #0984e3;
+}
+
+body {
+  background: linear-gradient(135deg, #74b9ff, #a29bfe);
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 400px;
+  text-align: center;
+}
+
+.flag img {
+  width: 200px;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.inputUser {
+  text-align: left;
+  margin-top: 1.5rem;
+}
+
+.inputUser label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  color: #2d3436;
+}
+
+.inputUser input {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border: 1px solid #dcdde1;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.inputUser input:focus {
+  border-color: #0984e3;
+  outline: none;
+  box-shadow: 0 0 5px rgba(9, 132, 227, 0.3);
+}
+
+.continueBtn button {
+  margin: 0.3rem;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #0984e3;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.continueBtn button:hover {
+  background: #74b9ff;
+}
+
+.progress-container {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 10px;
+  margin: 10px 0;
+  height: 20px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #4caf50;
+  transition: width 0.1s linear;
+}
+
+input.correct {
+  border: 2px solid green !important;
+  background-color: #d4edda !important;
+  font-weight: bold;
+}
+
+input.correct::selection {
+  background: #28a745;
+}
+
+input.wrong {
+  border: 2px solid red !important;
+  background-color: #f8d7da !important;
+}
+
+input.wrong::selection {
+  background: #dc3545;
+}
+
+input.wrong[value*="Doğru:"] {
+  color: #dc3545;
+}
+
+input.wrong[value*="Doğru:"]::after {
+  content: attr(data-correct);
+  color: green;
+  font-weight: bold;
+}
+
+input.correct,
+input.wrong {
+  pointer-events: none;
+}
+
+#result {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  min-height: 80vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
+  box-sizing: border-box;
+}
+
+.end-game-wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 20px;
+  top: 100px;
+}
+
+#skorboard {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+}
+
+#skorboard h2 {
+  margin-bottom: 15px;
+  color: #1976d2;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+#skorboard ol {
+  list-style: none;
+  padding: 0;
+}
+
+#skorboard li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+#skorboard li:last-child {
+  border-bottom: none;
+}
+
+#skorboardUser {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+}
+
+#skorboardUser h2 {
+  margin-bottom: 15px;
+  color: #1976d2;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+#skorboardUser ol {
+  list-style: none;
+  padding: 0;
+}
+
+#skorboardUser li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+#skorboardUser li:last-child {
+  border-bottom: none;
+}
+
+.end-game-card {
+  flex: 2;
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+}
+
+.end-game-card h2 {
+  color: #1976d2;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.stats-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.stats-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 1rem;
+  color: #555;
+  display: flex;
+  justify-content: space-between;
+}
+
+.stats-list li:last-child {
+  border-bottom: none;
+  font-weight: bold;
+  color: #1976d2;
+}
+
+.end-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.end-buttons button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#playAgainBtn {
+  background: #4caf50;
+  color: white;
+}
+
+#playAgainBtn:hover {
+  background: #45a049;
+}
+
+#goHomeBtn {
+  background: #ff9800;
+  color: white;
+}
+
+#goHomeBtn:hover {
+  background: #e68900;
+}
+
+@media (max-width: 768px) {
+  #result {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .end-game-wrapper {
+    flex-direction: column;
+  }
+
+  #skorboard,
+  #skorboardUser,
+  .end-game-card {
+    max-width: 100%;
+  }
 }

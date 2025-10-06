@@ -3,24 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Country Game</title>
     <link rel="stylesheet" href="game.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
   </head>
-  <body>
-    <div>
-      <select name="gameType" id="gameType">
-        <option value="hard">Default</option>
-        <option value="hard">Zor</option>
-        <option value="medium">Orta</option>
-        <option value="kolay">Kolay</option>
-      </select>
-    </div>
+  <body onload="viewCountries(),initGame()">
     <div class="card" id="main">
-      <div id="score">Score :</div>
+      <div id="index">Soru :</div>
+      <div id="score">Score : 0</div>
       <div class="flag" id="flag"></div>
-      <div class="countryname">
-        <p id="countaryName"></p>
-      </div>
+
       <div class="inputUser">
         <label for="countaryNameInput">Ülke Adı :</label>
         <input type="text" id="countaryNameInput" />
@@ -29,15 +21,41 @@
         <input type="text" id="countaryCapitalInput" />
         <br />
         <label for="countaryPopulationInput">Nüfusu :</label>
-        <input type="number" id="countaryPopulationInput" />
+        <input type="number" id="countaryPopulationInput" min="0" step="1" />
         <br />
-        <label for="countaryPopulationInput">Puan :</label>
-        <input type="number" id="point" />
+        <div id="answers"></div>
+      </div>
+      <div class="progress-container" style="display: none">
+        <div class="progress-bar" id="progressBar">
+          Sonraki soruya geçiliyor
+        </div>
       </div>
       <div class="continueBtn">
-        <button id="continueBtn" onclick="viewCountries()">Sonraki</button>
-        <button id="continueBtn" onclick="control()">deneme</button>
+        <button style="display: none" id="continueBtn" onclick="">
+          Sonraki Soru
+        </button>
+        <button id="continueBtn" onclick="onayla()">Onayla</button>
+        <button id="continueBtn" onclick="clearSelectedGameType()">
+          Oyundan Çık
+        </button>
+        <button id="getresultBtn" style="display: none">Sonuçları Getir</button>
       </div>
+    </div>
+    <div id="result" style="display: none">
+      <h2>- Sonuçların -</h2>
+    </div>
+    <div class="skorboard" id="skorboard" style="display: none">
+      <ol id="skorboard">
+        <h2>En İyiler</h2>
+      </ol>
+    </div>
+    <div class="skorboardUser" id="skorboardUser" style="display: none">
+      <ol id="skorboardUser">
+        <h2>En İyi Skorların</h2>
+      </ol>
+    </div>
+    <div id="goIndex" style="display: none">
+      <button onclick="clearSelectedGameType()">Anasayfa</button>
     </div>
   </body>
   <script src="game.js"></script>
